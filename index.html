@@ -1,0 +1,1702 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Литература — кофейня в Павловском Посаде</title>
+
+<style>
+:root{
+--coffee-dark:#2b1b12;
+--coffee:#5a3825;
+--coffee-soft:#8b6548;
+--cream:#f5eadb;
+--milk:#fff8ef;
+--paper:#fbf4e8;
+--green:#173f32;
+--green-light:#2f6b55;
+--gold:#c39a63;
+--text:#2a211b;
+--muted:#746457;
+--shadow:0 24px 60px rgba(43,27,18,.18);
+--radius:28px;
+
+--link-accent:#1f66ff;
+}
+
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+font-family:Georgia,"Times New Roman",serif;
+color:var(--text);
+background:
+radial-gradient(circle at 15% 15%, rgba(90, 56, 37, 0.22), transparent 30%),
+radial-gradient(circle at 85% 20%, rgba(195, 154, 99, 0.25), transparent 32%),
+radial-gradient(circle at 50% 90%, rgba(23, 63, 50, 0.13), transparent 36%),
+linear-gradient(135deg, #fff5e5 0%, #ead1b4 42%, #c79a72 100%);
+min-height:100vh;
+overflow-x:hidden;
+}
+
+/* Мягкий литературный фон */
+.bg-portraits{
+position:fixed;
+inset:0;
+z-index:-4;
+pointer-events:none;
+overflow:hidden;
+
+background:
+radial-gradient(circle at 50% 35%, rgba(255,248,239,.15), transparent 45%),
+linear-gradient(rgba(43,27,18,.22), rgba(43,27,18,.35)),
+url("images/paper-texture.jpg"),
+url("images/pushkin.jpg"),
+url("images/esenin.jpg"),
+url("images/akhmatova.jpg"),
+url("images/tsvetaeva.jpg");
+
+background-size:
+cover,
+cover,
+cover,
+650px auto,
+650px auto,
+650px auto,
+650px auto;
+
+background-position:
+center,
+center,
+center,
+-120px 45%,
+calc(100% + 120px) 45%,
+15% 95%,
+85% 95%;
+
+background-repeat:no-repeat;
+
+filter:sepia(.35);
+opacity:.38;
+transform:scale(1.06);
+}
+
+.bg-portraits::after{
+content:"";
+position:absolute;
+inset:-40px;
+
+background:
+radial-gradient(circle at center, transparent 25%, rgba(255,248,239,.5) 90%);
+
+backdrop-filter:blur(3px);
+}
+
+
+/* Никаких боковых стихов. Если хочешь — можно вообще убрать этот слой */
+body::before{
+content:"";
+position:fixed;
+inset:0;
+pointer-events:none;
+z-index:-3;
+}
+
+a{color:inherit;text-decoration:none;}
+img{max-width:100%;display:block;}
+
+.container{
+width:min(1180px, calc(100% - 36px));
+margin:0 auto;
+}
+
+.topbar{
+position:sticky;
+top:0;
+z-index:50;
+backdrop-filter:blur(18px);
+background:rgba(255,248,239,.88);
+border-bottom:1px solid rgba(90,56,37,.12);
+}
+
+.nav{
+min-height:78px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:24px;
+}
+
+.brand{
+display:flex;
+align-items:center;
+gap:14px;
+font-weight:700;
+color:var(--coffee-dark);
+}
+
+.logo{
+width:54px;
+height:54px;
+border-radius:16px;
+background:linear-gradient(145deg, rgba(195,154,99,.9), rgba(90,56,37,.96));
+border:2px solid rgba(255,255,255,.55);
+box-shadow:0 10px 24px rgba(43,27,18,.22);
+display:grid;
+place-items:center;
+color:var(--milk);
+font-size:28px;
+overflow:hidden;
+}
+
+.logo img{width:100%;height:100%;object-fit:cover;}
+
+.brand-text strong{
+display:block;
+font-size:23px;
+letter-spacing:.5px;
+}
+.brand-text span{
+display:block;
+margin-top:3px;
+font-size:13px;
+color:var(--muted);
+font-family:Arial,sans-serif;
+}
+
+.menu{
+display:flex;
+align-items:center;
+gap:18px;
+font-family:Arial,sans-serif;
+font-size:14px;
+color:var(--coffee);
+}
+.menu a{
+padding:10px 12px;
+border-radius:999px;
+transition:.25s;
+}
+.menu a:hover{
+background:rgba(90,56,37,.09);
+color:var(--green);
+}
+
+.hero{padding:72px 0 50px;}
+.hero-grid{
+display:grid;
+grid-template-columns:1.08fr .92fr;
+gap:38px;
+align-items:center;
+}
+
+.eyebrow{
+display:inline-flex;
+align-items:center;
+gap:10px;
+padding:9px 14px;
+border-radius:999px;
+background:rgba(23,63,50,.1);
+color:var(--green);
+font-family:Arial,sans-serif;
+font-size:14px;
+margin-bottom:22px;
+}
+.eyebrow::before{
+content:"";
+width:8px;height:8px;
+border-radius:999px;
+background:var(--green-light);
+box-shadow:0 0 0 6px rgba(47,107,85,.14);
+}
+
+h1{
+font-size:clamp(46px, 7vw, 96px);
+line-height:.92;
+color:var(--coffee-dark);
+letter-spacing:-3px;
+margin-bottom:24px;
+}
+
+.hero p{
+font-size:21px;
+line-height:1.65;
+color:#4d3b2e;
+max-width:650px;
+}
+
+.actions{
+display:flex;
+flex-wrap:wrap;
+gap:14px;
+margin-top:30px;
+}
+
+.btn{
+display:inline-flex;
+align-items:center;
+justify-content:center;
+min-height:52px;
+padding:0 22px;
+border-radius:999px;
+font-family:Arial,sans-serif;
+font-weight:700;
+transition:.25s;
+border:1px solid transparent;
+cursor:pointer;
+}
+
+.btn-primary{
+background:var(--green);
+color:var(--milk);
+box-shadow:0 14px 28px rgba(23,63,50,.22);
+}
+.btn-primary:hover{
+background:#0f2d24;
+transform:translateY(-2px);
+}
+
+.btn-secondary{
+background:rgba(255,255,255,.55);
+border-color:rgba(90,56,37,.2);
+color:var(--coffee-dark);
+}
+.btn-secondary:hover{
+background:var(--milk);
+transform:translateY(-2px);
+}
+
+.hero-card{
+position:relative;
+background:rgba(255,248,239,.72);
+border:1px solid rgba(90,56,37,.14);
+border-radius:34px;
+padding:18px;
+box-shadow:var(--shadow);
+overflow:hidden;
+}
+.hero-card::before{
+content:"";
+position:absolute;
+inset:18px;
+border-radius:26px;
+border:1px solid rgba(255,255,255,.5);
+pointer-events:none;
+z-index:2;
+}
+
+.place-photo{
+height:520px;
+border-radius:26px;
+background:
+linear-gradient(rgba(43,27,18,.05), rgba(43,27,18,.24)),
+url("images/interior.jpg");
+background-size:cover;
+background-position:center;
+position:relative;
+overflow:hidden;
+}
+.place-photo::after{
+content:"Фото заведения";
+position:absolute;
+left:22px;bottom:22px;
+padding:10px 14px;
+border-radius:999px;
+background:rgba(255,248,239,.9);
+color:var(--coffee-dark);
+font-family:Arial,sans-serif;
+font-size:14px;
+font-weight:700;
+}
+
+.photo-note{
+position:absolute;
+right:26px;top:26px;
+width:190px;
+padding:16px;
+border-radius:22px;
+background:rgba(23,63,50,.92);
+color:var(--milk);
+font-size:17px;
+line-height:1.35;
+box-shadow:0 18px 38px rgba(23,63,50,.24);
+}
+
+section{padding:58px 0;}
+.section-title{margin-bottom:28px;}
+.section-title span{
+display:inline-block;
+color:var(--green);
+font-family:Arial,sans-serif;
+font-weight:700;
+font-size:14px;
+letter-spacing:1.4px;
+text-transform:uppercase;
+margin-bottom:10px;
+}
+
+h2{
+font-size:clamp(34px, 4vw, 58px);
+line-height:1;
+color:var(--coffee-dark);
+letter-spacing:-1.5px;
+}
+
+.about-card{
+display:grid;
+grid-template-columns:.95fr 1.05fr;
+gap:30px;
+align-items:stretch;
+background:rgba(255,248,239,.78);
+border:1px solid rgba(90,56,37,.14);
+border-radius:var(--radius);
+box-shadow:var(--shadow);
+overflow:hidden;
+}
+
+.about-image{
+min-height:430px;
+background:
+linear-gradient(rgba(23,63,50,.03), rgba(43,27,18,.12)),
+url("images/coffee-flower.jpg");
+background-size:cover;
+background-position:center;
+}
+
+.about-content{padding:38px;}
+.about-content p{
+font-size:20px;
+line-height:1.7;
+color:#4d3b2e;
+margin-bottom:18px;
+}
+
+.features{
+display:grid;
+grid-template-columns:repeat(3, 1fr);
+gap:18px;
+margin-top:24px;
+}
+.feature{
+background:rgba(23,63,50,.08);
+border:1px solid rgba(23,63,50,.12);
+border-radius:22px;
+padding:20px;
+}
+.feature strong{
+display:block;
+color:var(--green);
+font-size:20px;
+margin-bottom:8px;
+}
+.feature p{
+font-family:Arial,sans-serif;
+font-size:14px;
+line-height:1.5;
+color:var(--muted);
+margin:0;
+}
+
+.library{
+background:linear-gradient(135deg, rgba(23,63,50,.96), rgba(43,27,18,.94));
+color:var(--milk);
+border-radius:34px;
+padding:48px;
+box-shadow:0 28px 70px rgba(23,63,50,.24);
+position:relative;
+overflow:hidden;
+}
+.library h2{color:var(--milk);max-width:760px;}
+.library p{
+margin-top:20px;
+max-width:820px;
+color:rgba(255,248,239,.82);
+font-size:20px;
+line-height:1.7;
+}
+
+.book-grid{
+display:grid;
+grid-template-columns:repeat(5, 1fr);
+gap:18px;
+margin-top:34px;
+position:relative;
+z-index:2;
+}
+
+.book{
+min-height:260px;
+border-radius:22px;
+overflow:hidden;
+background:rgba(255,248,239,.1);
+border:1px solid rgba(255,248,239,.18);
+display:flex;
+flex-direction:column;
+}
+
+.book-photo{
+height:145px;
+background-size:cover;
+background-position:center top;
+background-repeat:no-repeat;
+filter:sepia(.12);
+}
+
+.book-text{padding:16px;}
+.book strong{
+display:block;
+font-size:21px;
+color:#fff5e7;
+margin-bottom:8px;
+}
+.book span{
+color:rgba(255,248,239,.72);
+font-family:Arial,sans-serif;
+font-size:13px;
+line-height:1.45;
+}
+
+/* Портреты авторов — только оригиналы (без thumb) */
+.pushkin-photo{background-image:url("images/pushkin.jpg");}
+.esenin-photo{background-image:url("images/esenin.jpg");}
+.akhmatova-photo{background-image:url("images/akhmatova.jpg");}
+.tsvetaeva-photo{background-image:url("images/tsvetaeva.jpg");}
+.block-photo{background-image:url("images/blok.jpg");}
+
+.authors-grid{
+display:grid;
+grid-template-columns:repeat(4, 1fr);
+gap:22px;
+}
+
+.author{
+background:rgba(255,248,239,.78);
+border:1px solid rgba(90,56,37,.14);
+border-radius:26px;
+overflow:hidden;
+box-shadow:0 18px 44px rgba(43,27,18,.12);
+transition:.25s;
+}
+.author:hover{transform:translateY(-6px);}
+
+.author-img{
+height:290px;
+background-size:cover;
+background-position:center top;
+background-repeat:no-repeat;
+filter:sepia(.15);
+}
+
+.author-info{padding:22px;}
+.author-info strong{
+display:block;
+font-size:23px;
+color:var(--coffee-dark);
+margin-bottom:8px;
+}
+.author-info p{
+font-family:Arial,sans-serif;
+color:var(--muted);
+line-height:1.55;
+font-size:14px;
+}
+
+.gallery-grid{
+display:grid;
+grid-template-columns:1.2fr .8fr .8fr;
+gap:18px;
+}
+
+.gallery-card{
+min-height:300px;
+border-radius:28px;
+overflow:hidden;
+box-shadow:0 18px 44px rgba(43,27,18,.14);
+border:1px solid rgba(90,56,37,.14);
+background-size:cover;
+background-position:center;
+position:relative;
+}
+
+.gallery-card.big{
+min-height:440px;
+grid-row:span 2;
+background-image:
+linear-gradient(rgba(43,27,18,.02), rgba(43,27,18,.18)),
+url("images/interior.jpg");
+}
+.gallery-card.coffee{
+background-image:
+linear-gradient(rgba(43,27,18,.02), rgba(43,27,18,.18)),
+url("images/coffee-croissant.jpg");
+}
+.gallery-card.books{
+background-image:
+linear-gradient(rgba(43,27,18,.02), rgba(43,27,18,.18)),
+url("images/coffee-flower.jpg");
+}
+.gallery-card.dessert{
+background-image:
+linear-gradient(rgba(43,27,18,.02), rgba(43,27,18,.18)),
+url("images/coffee-flower.jpg");
+}
+.gallery-card.interior{
+background-image:
+linear-gradient(rgba(43,27,18,.02), rgba(43,27,18,.18)),
+url("images/interior.jpg");
+}
+
+.gallery-card span{
+position:absolute;
+left:18px;
+bottom:18px;
+padding:10px 14px;
+border-radius:999px;
+background:rgba(255,248,239,.9);
+color:var(--coffee-dark);
+font-family:Arial,sans-serif;
+font-weight:700;
+font-size:14px;
+}
+
+.reviews-grid{
+display:grid;
+grid-template-columns:repeat(3, 1fr);
+gap:20px;
+}
+
+.review{
+background:rgba(255,248,239,.78);
+border:1px solid rgba(90,56,37,.14);
+border-radius:26px;
+padding:26px;
+box-shadow:0 18px 44px rgba(43,27,18,.11);
+}
+
+.review-top{
+display:flex;
+align-items:center;
+justify-content:space-between;
+margin-bottom:16px;
+gap:12px;
+}
+
+.review strong{color:var(--coffee-dark);font-size:20px;}
+.rating{
+font-family:Arial,sans-serif;
+color:var(--gold);
+letter-spacing:2px;
+font-weight:700;
+}
+.review p{
+font-size:17px;
+line-height:1.65;
+color:#4d3b2e;
+}
+.review small{
+display:block;
+margin-top:16px;
+font-family:Arial,sans-serif;
+color:var(--muted);
+font-size:13px;
+}
+
+.contacts-card{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:24px;
+background:rgba(255,248,239,.78);
+border:1px solid rgba(90,56,37,.14);
+border-radius:var(--radius);
+box-shadow:var(--shadow);
+overflow:hidden;
+}
+
+.contacts-info{padding:38px;}
+.contact-row{
+padding:18px 0;
+border-bottom:1px solid rgba(90,56,37,.12);
+}
+.contact-row:last-child{border-bottom:none;}
+
+.contact-row b{
+display:block;
+color:var(--green);
+font-family:Arial,sans-serif;
+font-size:13px;
+text-transform:uppercase;
+letter-spacing:1px;
+margin-bottom:7px;
+}
+
+.contact-row span, .contact-row a{
+font-size:20px;
+line-height:1.5;
+color:var(--coffee-dark);
+}
+
+/* Кнопка "Открыть страницу заведения" в стиле сайта */
+.contacts-link-btn{
+display:inline-flex;
+align-items:center;
+justify-content:center;
+margin-top:6px;
+padding:9px 14px;
+border-radius:999px;
+background:var(--green);
+color:#ffffff;
+font-family:Arial,sans-serif;
+font-weight:800;
+font-size:13px;
+box-shadow:0 12px 24px rgba(23,63,50,.22);
+border:1px solid rgba(255,255,255,.25);
+transition:.25s;
+}
+.contacts-link-btn:hover{
+background:#0f2d24;
+transform:translateY(-2px);
+}
+
+.map-box{
+min-height:470px;
+background:
+linear-gradient(rgba(23,63,50,.18), rgba(43,27,18,.28)),
+url("https://static-maps.yandex.ru/1.x/?ll=38.669185,55.781160&z=16&l=map&size=650,450");
+background-size:cover;
+background-position:center;
+position:relative;
+}
+
+.map-box a{
+position:absolute;
+left:28px;
+bottom:28px;
+background:var(--green);
+color:var(--milk);
+padding:14px 20px;
+border-radius:999px;
+font-family:Arial,sans-serif;
+font-weight:700;
+box-shadow:0 16px 32px rgba(23,63,50,.28);
+}
+
+.footer{
+padding:34px 0 46px;
+color:var(--muted);
+font-family:Arial,sans-serif;
+text-align:center;
+}
+.footer b{color:var(--coffee-dark);}
+
+@media (max-width: 980px){
+.hero-grid, .about-card, .contacts-card{grid-template-columns:1fr;}
+.place-photo{height:420px;}
+.features, .reviews-grid{grid-template-columns:1fr;}
+.book-grid, .authors-grid{grid-template-columns:repeat(2, 1fr);}
+.gallery-grid{grid-template-columns:1fr;}
+.gallery-card.big{min-height:360px;}
+.menu{display:none;}
+.bg-portraits{opacity:0.16;}
+}
+
+@media (max-width: 560px){
+.container{width:min(100% - 24px, 1180px);}
+.hero{padding-top:44px;}
+h1{font-size:48px;letter-spacing:-1.5px;}
+.hero p, .about-content p, .library p{font-size:18px;}
+.book-grid, .authors-grid{grid-template-columns:1fr;}
+.library, .about-content, .contacts-info{padding:26px;}
+.photo-note{display:none;}
+.place-photo{height:340px;}
+.actions{flex-direction:column;}
+.btn{width:100%;}
+}
+
+/* Меню кофейни */
+.menu-section{
+background:rgba(255,248,239,.35);
+border-radius:34px;
+padding:40px;
+}
+.menu-grid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:22px;
+margin-top:30px;
+}
+.menu-card{
+background:rgba(255,248,239,.82);
+border:1px solid rgba(90,56,37,.14);
+border-radius:24px;
+padding:24px;
+box-shadow:0 18px 44px rgba(43,27,18,.10);
+transition:.3s ease;
+}
+.menu-card:hover{transform:translateY(-8px);}
+.menu-card h3{
+color:var(--coffee-dark);
+font-size:26px;
+margin-bottom:18px;
+}
+.menu-item{
+display:flex;
+justify-content:space-between;
+gap:15px;
+font-size:17px;
+margin:13px 0;
+color:#4d3b2e;
+}
+.menu-item b{color:var(--green);}
+@media(max-width:980px){.menu-grid{grid-template-columns:1fr;}}
+
+</style>
+
+<style>
+/* Анимированный литературный фон */
+.bg-portraits{
+position:fixed;
+inset:0;
+z-index:-10;
+overflow:hidden;
+background:
+linear-gradient(120deg, rgba(255,240,215,.75), rgba(60,35,20,.25)),
+url("images/background-paper.jpg");
+background-size:cover;
+animation: paperMove 25s ease-in-out infinite alternate;
+}
+
+.bg-portraits::before{
+content:"";
+position:absolute;
+inset:-40px;
+background:
+url("images/pushkin.jpg") left center/420px auto no-repeat,
+url("images/esenin.jpg") right center/420px auto no-repeat,
+url("images/akhmatova.jpg") 20% bottom/360px auto no-repeat,
+url("images/tsvetaeva.jpg") 80% bottom/360px auto no-repeat;
+filter:blur(7px) sepia(.5);
+opacity:.28;
+animation: poetsMove 18s ease-in-out infinite alternate;
+}
+
+.bg-portraits::after{
+content:"";
+position:absolute;
+inset:0;
+background:
+radial-gradient(circle at center, transparent 20%, rgba(35,20,10,.35));
+}
+
+@keyframes paperMove{
+from{background-position:center top;}
+to{background-position:center bottom;}
+}
+
+@keyframes poetsMove{
+from{transform:scale(1) translateY(0);}
+to{transform:scale(1.04) translateY(-15px);}
+}
+</style>
+
+
+<style>
+/* Эффекты старой библиотеки: пыль + мягкое свечение */
+
+.library-glow{
+position:fixed;
+inset:-20%;
+z-index:-4;
+pointer-events:none;
+background:
+radial-gradient(circle at 30% 30%, rgba(255,210,130,.22), transparent 25%),
+radial-gradient(circle at 75% 60%, rgba(255,190,90,.18), transparent 30%);
+animation: glowMove 12s ease-in-out infinite alternate;
+}
+
+.library-dust{
+position:fixed;
+inset:0;
+z-index:20;
+pointer-events:none;
+overflow:hidden;
+}
+
+.library-dust span{
+position:absolute;
+width:5px;
+height:5px;
+background:rgba(255,230,170,.55);
+border-radius:50%;
+filter:blur(.5px);
+animation:dustFall linear infinite;
+}
+
+@keyframes dustFall{
+0%{
+transform:translateY(-10vh) translateX(0);
+opacity:0;
+}
+20%{
+opacity:1;
+}
+100%{
+transform:translateY(110vh) translateX(60px);
+opacity:0;
+}
+}
+
+@keyframes glowMove{
+from{
+transform:translate(-2%, -1%) scale(1);
+}
+to{
+transform:translate(2%, 2%) scale(1.08);
+}
+}
+</style>
+
+<div class="library-glow"></div>
+<div class="library-dust" id="libraryDust"></div>
+
+<script>
+const dust=document.getElementById("libraryDust");
+
+for(let i=0;i<45;i++){
+let p=document.createElement("span");
+p.style.left=Math.random()*100+"%";
+p.style.animationDuration=(8+Math.random()*18)+"s";
+p.style.animationDelay=(-Math.random()*20)+"s";
+p.style.width=(2+Math.random()*5)+"px";
+p.style.height=p.style.width;
+dust.appendChild(p);
+}
+</script>
+
+
+<style>
+/* Интерактивная кофейня */
+
+.coffee-steam{
+position:absolute;
+width:8px;
+height:60px;
+border-radius:50%;
+background:rgba(255,255,255,.25);
+filter:blur(5px);
+animation:steam 4s infinite;
+}
+
+@keyframes steam{
+0%{transform:translateY(20px) scale(.8);opacity:0;}
+50%{opacity:.7;}
+100%{transform:translateY(-80px) scale(1.3);opacity:0;}
+}
+
+.book-hover, .coffee-hover, .author-img{
+transition:.5s ease;
+}
+
+.book-hover:hover,
+.coffee-hover:hover{
+transform:translateY(-8px) rotate(-2deg);
+filter:drop-shadow(0 15px 25px rgba(0,0,0,.25));
+}
+
+.author-img:hover{
+transform:scale(1.04);
+}
+
+/* Строка дня */
+.quote-day{
+max-width:700px;
+margin:40px auto;
+text-align:center;
+font-family:Georgia,serif;
+font-size:28px;
+font-style:italic;
+line-height:1.5;
+opacity:0;
+animation:quoteAppear 2s forwards;
+}
+
+@keyframes quoteAppear{
+from{opacity:0;transform:translateY(20px);}
+to{opacity:1;transform:translateY(0);}
+}
+
+/* Галерея как картина */
+.atmosphere-lightbox img{
+border:15px solid rgba(245,230,200,.8);
+box-shadow:0 20px 70px rgba(0,0,0,.45);
+animation:paintingOpen .6s ease;
+}
+
+@keyframes paintingOpen{
+from{transform:scale(.7) rotate(-3deg);opacity:0;}
+to{transform:scale(1) rotate(0);opacity:1;}
+}
+
+</style>
+
+<script>
+const literaryQuotes=[
+"Я вас любил: любовь ещё, быть может...",
+"Не жалею, не зову, не плачу...",
+"Мне голос был. Он звал утешно...",
+"И долго буду тем любезен я народу..."
+];
+
+function changeQuote(){
+let q=document.querySelector(".quote-day");
+if(q){
+q.style.opacity=0;
+setTimeout(()=>{
+q.innerHTML=literaryQuotes[Math.floor(Math.random()*literaryQuotes.length)];
+q.style.opacity=1;
+},500);
+}
+}
+
+setInterval(changeQuote,10000);
+</script>
+
+
+<style>
+.place-slider{
+height:520px;
+border-radius:26px;
+overflow:hidden;
+position:relative;
+background-size:cover;
+background-position:center;
+}
+.place-slide{
+width:100%;
+height:100%;
+background-size:cover;
+background-position:center;
+transition:.4s;
+}
+.slider-btn{
+position:absolute;
+top:50%;
+transform:translateY(-50%);
+width:44px;
+height:44px;
+border:0;
+border-radius:50%;
+background:rgba(255,248,239,.9);
+color:#173f32;
+font-size:32px;
+cursor:pointer;
+z-index:3;
+}
+.slider-btn.prev{left:15px;}
+.slider-btn.next{right:15px;}
+@media(max-width:560px){.place-slider{height:340px;}}
+</style>
+</head>
+
+<body>
+<div class="bg-portraits" aria-hidden="true"></div>
+
+<header class="topbar">
+<div class="container nav">
+<a href="#home" class="brand">
+<div class="logo">
+<img src="images/logo.jpg" alt="Логотип кофейни" onerror="this.remove(); this.parentElement.textContent='Л';" />
+</div>
+<div class="brand-text">
+<strong>Литература</strong>
+<span>кофейня, книги и уют</span>
+</div>
+</a>
+
+<nav class="menu">
+<a href="#about">О кофейне</a>
+<a href="#library">Библиотека</a>
+<a href="#menu">Меню</a>
+<a href="#authors">Авторы</a>
+<a href="#gallery">Атмосфера</a>
+<a href="#reviews">Отзывы</a>
+<a href="#contacts">Контакты</a>
+</nav>
+</div>
+</header>
+
+<main id="home">
+<section class="hero">
+<div class="container hero-grid">
+<div>
+<div class="eyebrow">Павловский Посад</div>
+<h1>Кофейня «Литература»</h1>
+<p>
+Место, где аромат кофе встречается с книгами, спокойной музыкой и тёплой атмосферой.<br />
+Здесь можно отдохнуть, почитать, поработать за ноутбуком или провести время с друзьями.
+</p>
+
+<div class="actions">
+<a
+class="btn btn-primary"
+href="https://yandex.ru/maps/10746/pavlovskiy-posad/?ll=38.669185%2C55.781160&mode=poi&poi%5Bpoint%5D=38.669159%2C55.781135&poi%5Buri%5D=ymapsbm1%3A%2F%2Forg%3Foid%3D196121790587&z=17"
+target="_blank"
+rel="noopener"
+>
+Открыть в Яндекс Картах
+</a>
+
+<a class="btn btn-secondary" href="#contacts">Посмотреть контакты</a>
+</div>
+</div>
+
+<div class="hero-card">
+<div class="place-slider">
+<div class="place-slide" id="placeSlide"></div>
+<button class="slider-btn prev" onclick="changePlace(-1)">‹</button>
+<button class="slider-btn next" onclick="changePlace(1)">›</button>
+<div class="photo-note">
+Кофе, книги, десерты и спокойная атмосфера в центре города.
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<section id="about">
+<div class="container">
+<div class="section-title">
+<span>О заведении</span>
+<h2>Уютное пространство для встреч и чтения</h2>
+</div>
+
+<div class="about-card">
+<div class="about-image"></div>
+
+<div class="about-content">
+<p>
+«Литература» — это кофейня с особым настроением: мягкий свет, тёплые кофейные оттенки,<br />
+книжные полки, спокойная обстановка и ощущение маленького литературного клуба.
+</p>
+<p>
+Сюда приятно зайти утром за кофе, днём — на десерт, а вечером — чтобы немного замедлиться,<br />
+открыть книгу и провести время без спешки.
+</p>
+
+<div class="features">
+<div class="feature">
+<strong>Кофе</strong>
+<p>Классические напитки, сезонные вкусы и ароматная подача.</p>
+</div>
+
+<div class="feature">
+<strong>Книги</strong>
+<p>Литературная атмосфера, цитаты и настроение старой библиотеки.</p>
+</div>
+
+<div class="feature">
+<strong>Уют</strong>
+<p>Спокойное место для встреч, работы и отдыха.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<section id="library">
+<div class="container">
+<div class="library">
+<span class="eyebrow" style="background: rgba(255,255,255,0.1); color: #fff8ef;">Литературная атмосфера</span>
+<h2>Маленькая библиотека внутри кофейни</h2>
+<p>
+В оформлении сайта использованы мотивы русской литературы: портреты известных авторов,<br />
+тёплые книжные оттенки и настроение спокойного читального зала.
+</p>
+
+<div class="book-grid">
+<div class="book">
+<div class="book-photo pushkin-photo"></div>
+<div class="book-text">
+<strong>Пушкин</strong>
+<span>Классика, лёгкость строки и узнаваемая поэтическая интонация.</span>
+</div>
+</div>
+
+<div class="book">
+<div class="book-photo esenin-photo"></div>
+<div class="book-text">
+<strong>Есенин</strong>
+<span>Тёплая лирика, простота образов и чувство родного пространства.</span>
+</div>
+</div>
+
+<div class="book">
+<div class="book-photo akhmatova-photo"></div>
+<div class="book-text">
+<strong>Ахматова</strong>
+<span>Тонкая поэзия, строгость формы и глубокое настроение.</span>
+</div>
+</div>
+
+<div class="book">
+<div class="book-photo tsvetaeva-photo"></div>
+<div class="book-text">
+<strong>Цветаева</strong>
+<span>Энергичная строка, сильный голос и эмоциональная выразительность.</span>
+</div>
+</div>
+
+<div class="book">
+<div class="book-photo block-photo"></div>
+<div class="book-text">
+<strong>Блок</strong>
+<span>Символизм, музыкальность и особенная атмосфера серебряного века.</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+
+<section id="menu">
+<div class="container">
+<div class="section-title">
+<span>Меню</span>
+<h2>Кофе, десерты и авторские напитки</h2>
+</div>
+
+<div class="menu-section">
+<div class="menu-grid">
+<div class="menu-card">
+<h3>Кофе</h3>
+<div class="menu-item"><span>Капучино</span><b>220 ₽</b></div>
+<div class="menu-item"><span>Раф</span><b>260 ₽</b></div>
+<div class="menu-item"><span>Латте</span><b>240 ₽</b></div>
+</div>
+
+<div class="menu-card">
+<h3>Напитки</h3>
+<div class="menu-item"><span>Лимонад домашний</span><b>230 ₽</b></div>
+<div class="menu-item"><span>Чай ягодный</span><b>200 ₽</b></div>
+<div class="menu-item"><span>Какао</span><b>220 ₽</b></div>
+</div>
+
+<div class="menu-card">
+<h3>Десерты</h3>
+<div class="menu-item"><span>Чизкейк</span><b>280 ₽</b></div>
+<div class="menu-item"><span>Тирамису</span><b>320 ₽</b></div>
+<div class="menu-item"><span>Круассан</span><b>180 ₽</b></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<section id="authors">
+<div class="container">
+<div class="section-title">
+<span>Портреты</span>
+<h2>Авторы, создающие настроение</h2>
+</div>
+
+<div class="authors-grid">
+<div class="author">
+<div class="author-img pushkin-photo"></div>
+<div class="author-info">
+<strong>А. С. Пушкин</strong>
+<p>Символ русской литературы и классической поэзии.</p>
+</div>
+</div>
+
+<div class="author">
+<div class="author-img esenin-photo"></div>
+<div class="author-info">
+<strong>С. А. Есенин</strong>
+<p>Лирика природы, дома и светлой грусти.</p>
+</div>
+</div>
+
+<div class="author">
+<div class="author-img akhmatova-photo"></div>
+<div class="author-info">
+<strong>А. А. Ахматова</strong>
+<p>Сдержанная сила, точность слова и глубокий образ.</p>
+</div>
+</div>
+
+<div class="author">
+<div class="author-img tsvetaeva-photo"></div>
+<div class="author-info">
+<strong>М. И. Цветаева</strong>
+<p>Эмоциональность, ритм и яркая авторская интонация.</p>
+</div>
+</div>
+
+</div>
+</div>
+</section>
+
+<section id="gallery">
+<div class="container">
+<div class="section-title">
+<span>Атмосфера кофейни</span>
+<h2>Кофе, книги и детали интерьера</h2>
+</div>
+
+
+<div class="atmosphere-gallery">
+<div class="atmosphere-card" onclick="openAtmosphere('interior')" style="background-image:url('images/interior.jpg')"><span>Интерьер</span></div>
+<div class="atmosphere-card" onclick="openAtmosphere('coffee')" style="background-image:url('images/coffee-croissant.jpg')"><span>Кофе</span></div>
+<div class="atmosphere-card" onclick="openAtmosphere('desserts')" style="background-image:url('images/dessert1.jpg')"><span>Десерты</span></div>
+<div class="atmosphere-card" onclick="openAtmosphere('books')" style="background-image:url('images/books1.jpg')"><span>Книги</span></div>
+<div class="atmosphere-card" onclick="openAtmosphere('atmosfera')" style="background-image:url('images/atmosfera.jpg')"><span>Атмосфера кофейни</span></div>
+</div>
+
+
+</div>
+</section>
+
+<section id="reviews">
+<div class="container">
+<div class="section-title">
+<span>Отзывы</span>
+<h2>Что говорят гости</h2>
+</div>
+
+<div class="reviews-grid">
+<div class="review">
+<div class="review-top">
+<strong>Анна</strong>
+<div class="rating">★★★★★</div>
+</div>
+<p>
+Очень приятное место: уютно, спокойно, вкусный кофе и красивая атмосфера.<br />
+Хочется возвращаться снова.
+</p>
+
+</div>
+
+<div class="review">
+<div class="review-top">
+<strong>Михаил</strong>
+<div class="rating">★★★★★</div>
+</div>
+<p>
+Хорошее место для встречи с друзьями. Понравился интерьер и ощущение маленькой библиотеки.
+</p>
+
+</div>
+
+<div class="review">
+<div class="review-top">
+<strong>Екатерина</strong>
+<div class="rating">★★★★★</div>
+</div>
+<p>
+Тёплая атмосфера, красивые детали, можно спокойно посидеть с книгой и чашкой кофе.
+</p>
+
+</div>
+</div>
+
+<div class="actions" style="margin-top: 28px;">
+<a
+class="btn btn-secondary"
+href="https://yandex.ru/maps/10746/pavlovskiy-posad/?ll=38.669185%2C55.781160&mode=poi&poi%5Bpoint%5D=38.669159%2C55.781135&poi%5Buri%5D=ymapsbm1%3A%2F%2Forg%3Foid%3D196121790587&z=17"
+target="_blank"
+rel="noopener"
+>
+Смотреть реальные отзывы на Яндекс Картах
+</a>
+</div>
+</div>
+</section>
+
+<section id="contacts">
+<div class="container">
+<div class="section-title">
+<span>Контакты</span>
+<h2>Как нас найти</h2>
+</div>
+
+<div class="contacts-card">
+<div class="contacts-info">
+<div class="contact-row">
+<b>Адрес</b>
+<span>ул. Кирова, 86А, Павловский Посад</span>
+</div>
+
+<div class="contact-row">
+<b>Яндекс Карты</b>
+<a
+class="contacts-link-btn"
+href="https://yandex.ru/maps/10746/pavlovskiy-posad/?ll=38.669185%2C55.781160&mode=poi&poi%5Bpoint%5D=38.669159%2C55.781135&poi%5Buri%5D=ymapsbm1%3A%2F%2Forg%3Foid%3D196121790587&z=17"
+target="_blank"
+rel="noopener"
+>
+Открыть страницу заведения
+</a>
+</div>
+
+<div class="contact-row">
+<b>Телефон</b>
+<a href="tel:+79998536837">+7 (999) 853-68-37</a>
+</div>
+
+<div class="contact-row">
+<b>Режим работы</b>
+<span>Ежедневно с 9:00 до 22:00</span>
+</div>
+
+<div class="contact-row">
+<b>Telegram</b>
+<a href="https://t.me/literatura_coffee_posad" target="_blank" rel="noopener">
+https://t.me/literatura_coffee_posad
+</a>
+</div>
+
+<div class="contact-row">
+<b>Instagram</b>
+<a href="https://www.instagram.com/literatura_coffee" target="_blank" rel="noopener">
+https://www.instagram.com/literatura_coffee
+</a>
+</div>
+
+<div class="contact-row">
+<b>TikTok</b>
+<a href="https://www.tiktok.com/@literaturacoffee?_r=1" target="_blank" rel="noopener">
+https://www.tiktok.com/@literaturacoffee
+</a>
+</div>
+</div>
+
+<div class="map-box">
+<a
+href="https://yandex.ru/maps/10746/pavlovskiy-posad/?ll=38.669185%2C55.781160&mode=poi&poi%5Bpoint%5D=38.669159%2C55.781135&poi%5Buri%5D=ymapsbm1%3A%2F%2Forg%3Foid%3D196121790587&z=17"
+target="_blank"
+rel="noopener"
+>
+Открыть карту
+</a>
+</div>
+</div>
+</div>
+</section>
+</main>
+
+<footer class="footer">
+<div class="container">
+<p><b>Кофейня «Литература»</b> — место, где вкус кофе соединяется с книгами, уютом и вдохновением.<br><span style="font-size:13px;opacity:.8;">by Storm</span></p>
+</div>
+</footer>
+
+<style>
+/* Входная заставка как начало фильма */
+.literary-intro{
+position:fixed;
+inset:0;
+background:
+linear-gradient(rgba(25,15,8,.72),rgba(25,15,8,.9)),
+url("images/background-paper.jpg");
+background-size:cover;
+z-index:99999;
+display:flex;
+align-items:center;
+justify-content:center;
+flex-direction:column;
+animation:introHide 1.2s ease 4s forwards;
+}
+
+.literary-intro h1{
+font-family:Georgia,serif;
+color:#f5dfb3;
+font-size:clamp(38px,6vw,80px);
+letter-spacing:3px;
+opacity:0;
+animation:titleAppear .9s ease .4s forwards;
+text-align:center;
+}
+
+.literary-intro p{
+color:#ead7b8;
+font-size:22px;
+font-style:italic;
+opacity:0;
+animation:titleAppear 2s ease 2.5s forwards;
+}
+
+.intro-cup{
+width:90px;
+height:90px;
+opacity:0;
+animation:cupAppear .9s ease .2s forwards;
+position:relative;
+}
+
+.cup-shape{
+display:block;
+position:absolute;
+left:15px;
+bottom:15px;
+width:55px;
+height:38px;
+background:linear-gradient(135deg,#8b5a35,#4b2a18);
+border-radius:0 0 22px 22px;
+box-shadow:0 12px 20px rgba(0,0,0,.35);
+}
+
+.cup-shape::before{
+content:"";
+position:absolute;
+right:-18px;
+top:5px;
+width:20px;
+height:25px;
+border:5px solid #6b3d22;
+border-left:0;
+border-radius:0 20px 20px 0;
+}
+
+.cup-shape::after{
+content:"";
+position:absolute;
+left:12px;
+top:-35px;
+width:30px;
+height:35px;
+background:linear-gradient(to top,rgba(255,255,255,.35),transparent);
+filter:blur(5px);
+border-radius:50%;
+animation:steam 3s infinite;
+}
+
+@keyframes cupAppear{
+from{opacity:0;transform:translateY(30px) scale(.8);}
+to{opacity:1;transform:translateY(0) scale(1);}
+}
+
+@keyframes titleAppear{
+from{opacity:0;filter:blur(10px);}
+to{opacity:1;filter:blur(0);}
+}
+
+@keyframes introHide{
+to{
+opacity:0;
+visibility:hidden;
+}
+}
+</style>
+
+<div class="literary-intro">
+<div class="intro-cup"><span class="cup-shape"></span></div>
+<h1>Литературная кофейня</h1>
+<p>Где кофе встречается со строками великих поэтов</p>
+</div>
+
+<script>
+setTimeout(()=>{
+const intro=document.querySelector(".literary-intro");
+if(intro) intro.remove();
+},5300);
+</script>
+
+
+
+<style>
+/* Новое красивое меню */
+.menu a.active{
+background:rgba(23,63,50,.12);
+color:var(--green);
+font-weight:700;
+}
+
+/* Галереи атмосферы */
+.atmosphere-gallery{
+display:grid;
+grid-template-columns:repeat(5,1fr);
+gap:18px;
+margin-top:35px;
+}
+
+.atmosphere-card{
+cursor:pointer;
+height:220px;
+border-radius:26px;
+overflow:hidden;
+position:relative;
+box-shadow:0 18px 40px rgba(43,27,18,.18);
+transition:.35s;
+background-size:cover;
+background-position:center;
+}
+
+.atmosphere-card:hover{
+transform:translateY(-8px) scale(1.02);
+}
+
+.atmosphere-card span{
+position:absolute;
+bottom:15px;
+left:15px;
+padding:9px 14px;
+background:rgba(255,248,239,.9);
+border-radius:999px;
+font-family:Arial,sans-serif;
+font-weight:700;
+}
+
+/* Lightbox */
+.atmosphere-lightbox{
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.85);
+z-index:999999;
+display:none;
+align-items:center;
+justify-content:center;
+}
+
+.atmosphere-lightbox.open{
+display:flex;
+}
+
+.atmosphere-lightbox img{
+max-width:85%;
+max-height:80vh;
+border-radius:20px;
+object-fit:contain;
+}
+
+.lightbox-btn{
+position:absolute;
+background:white;
+border:0;
+width:55px;
+height:55px;
+border-radius:50%;
+font-size:30px;
+cursor:pointer;
+}
+
+.lightbox-prev{left:30px;}
+.lightbox-next{right:30px;}
+.lightbox-close{top:30px;right:30px;}
+
+@media(max-width:980px){
+.atmosphere-gallery{grid-template-columns:repeat(2,1fr);}
+}
+
+@media(max-width:560px){
+.atmosphere-gallery{grid-template-columns:1fr;}
+}
+</style>
+
+<script>
+const atmosphereSets={
+interior:[
+"images/interior.jpg","images/interior2.jpg","images/interior3.jpg","images/interior4.jpg","images/interior5.jpg"
+],
+coffee:[
+"images/coffee-croissant.jpg","images/coffee2.jpg","images/coffee3.jpg","images/coffee4.jpg","images/coffee5.jpg"
+],
+desserts:[
+"images/dessert1.jpg","images/dessert2.jpg","images/dessert3.jpg","images/dessert4.jpg","images/dessert5.jpg"
+],
+books:[
+"images/books1.jpg","images/books2.jpg","images/books3.jpg","images/books4.jpg","images/books5.jpg"
+],
+place:[
+"images/place.jpg","images/place2.jpg","images/place3.jpg","images/place4.jpg","images/place5.jpg"
+],
+atmosfera:[
+"images/atmosfera.jpg","images/atmosfera2.jpg","images/atmosfera3.jpg","images/atmosfera4.jpg","images/atmosfera5.jpg"
+]
+};
+
+let currentSet=[];
+let currentIndex=0;
+
+function openAtmosphere(type){
+currentSet=atmosphereSets[type];
+currentIndex=0;
+showAtmosphere();
+document.querySelector(".atmosphere-lightbox").classList.add("open");
+}
+
+function showAtmosphere(){
+document.querySelector("#lightboxImage").src=currentSet[currentIndex];
+}
+
+function closeAtmosphere(){
+document.querySelector(".atmosphere-lightbox").classList.remove("open");
+}
+
+function nextAtmosphere(){
+currentIndex=(currentIndex+1)%currentSet.length;
+showAtmosphere();
+}
+
+function prevAtmosphere(){
+currentIndex=(currentIndex-1+currentSet.length)%currentSet.length;
+showAtmosphere();
+}
+</script>
+
+<div class="atmosphere-lightbox">
+<button class="lightbox-btn lightbox-close" onclick="closeAtmosphere()">×</button>
+<button class="lightbox-btn lightbox-prev" onclick="prevAtmosphere()">‹</button>
+<img id="lightboxImage" src="">
+<button class="lightbox-btn lightbox-next" onclick="nextAtmosphere()">›</button>
+</div>
+
+<script>
+const navLinks=document.querySelectorAll(".menu a");
+window.addEventListener("scroll",()=>{
+let pos=window.scrollY+120;
+navLinks.forEach(link=>{
+let section=document.querySelector(link.getAttribute("href"));
+if(section && section.offsetTop<=pos && section.offsetTop+section.offsetHeight>pos){
+navLinks.forEach(x=>x.classList.remove("active"));
+link.classList.add("active");
+}
+});
+});
+</script>
+
+
+<script>
+const placePhotos=[
+"images/place.jpg",
+"images/place2.jpg",
+"images/place3.jpg",
+"images/place4.jpg",
+"images/place5.jpg"
+];
+let placeIndex=0;
+function showPlace(){
+ const el=document.getElementById("placeSlide");
+ if(el) el.style.backgroundImage=`url('${placePhotos[placeIndex]}')`;
+}
+function changePlace(dir){
+ placeIndex=(placeIndex+dir+placePhotos.length)%placePhotos.length;
+ showPlace();
+}
+showPlace();
+</script>
+</body>
+</html>
+<style>
+/* Исправление кнопки "Открыть страницу заведения" */
+.contacts-link-btn{
+    background:#2f6b55 !important;
+    color:#ffffff !important;
+    font-family:Arial,sans-serif !important;
+    font-weight:800 !important;
+}
+
+.contacts-link-btn:hover{
+    background:#245442 !important;
+    color:#ffffff !important;
+}
+</style>
